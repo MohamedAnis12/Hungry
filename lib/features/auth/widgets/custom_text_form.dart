@@ -3,7 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:hungry/core/constants/app_colors.dart';
 
 class CustomTextForm extends StatefulWidget {
-  const CustomTextForm({super.key, required this.isPassword, required this._controller, required this.text});
+  const CustomTextForm({
+    super.key,
+    required this.isPassword,
+    required this._controller,
+    required this.text,
+  });
   final bool isPassword;
   final TextEditingController _controller;
   final String text;
@@ -51,6 +56,12 @@ class _CustomTextFormState extends State<CustomTextForm> {
             : Icon(Icons.arrow_back, color: Colors.white),
         //errorText: "some thing went wrong",
       ),
+
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'Please enter your ${widget.text}';
+        }
+      },
     );
   }
 }
