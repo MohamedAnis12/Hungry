@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 class CustomSubmissionButton extends StatelessWidget {
-  const CustomSubmissionButton({super.key, required this.onTap});
+  const CustomSubmissionButton({super.key, required this.onTap, required this.text});
   final void Function()? onTap;
+  final String text;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -17,7 +18,7 @@ class CustomSubmissionButton extends StatelessWidget {
         ),
         child: Center(
           child: Text(
-            "Login",
+            text,
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
         ),

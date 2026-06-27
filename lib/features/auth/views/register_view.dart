@@ -17,14 +17,13 @@ class RegisterView extends StatefulWidget {
 }
 
 class _RegisterViewState extends State<RegisterView> {
- final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _rePasswordController = TextEditingController();
 
-
   void _submitForm() {
-    if (_formKey.currentState!.validate()) {
+    if (_formKey.currentState!.validate()&&_passwordController.text==_rePasswordController.text) {
       FocusScope.of(context).unfocus();
 
       ScaffoldMessenger.of(context).showSnackBar(
@@ -41,7 +40,7 @@ class _RegisterViewState extends State<RegisterView> {
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text("some thing went wrong"),
+          content: Text("some thing went wrong ${_formKey.currentWidget.toString()}"),
           backgroundColor: Colors.red,
         ),
       );
@@ -85,30 +84,17 @@ class _RegisterViewState extends State<RegisterView> {
                     CustomTextForm(
                       isPassword: true,
                       controller: _passwordController,
-                      text: "Password ***",
+                      text: "Password ",
+                    ),
+                    Gap(20),
+                    CustomTextForm(
+                      isPassword: true,
+                      controller: _rePasswordController,
+                      text: "Repeat Password ",
                     ),
                     Gap(70),
-                    CustomSubmissionButton(onTap: _submitForm),
+                    CustomSubmissionButton(onTap: _submitForm,text: "Register",),
                     Gap(30),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Dont have an account ?    ",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        GestureDetector(
-                          onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (_) => RegisterView()),
-                          ),
-                          child: Text(
-                            "create new one ",
-                            style: TextStyle(color: Colors.blue),
-                          ),
-                        ),
-                      ],
-                    ),
                   ],
                 ),
               ),

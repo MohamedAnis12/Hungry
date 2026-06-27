@@ -27,7 +27,7 @@ class Hungry extends StatelessWidget {
 
       debugShowCheckedModeBanner: false,
 
-      home: LoginView(),
+      home: SplashView(),
     );
   }
 }

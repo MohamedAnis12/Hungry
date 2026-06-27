@@ -81,10 +81,10 @@ class _LoginViewState extends State<LoginView> {
                     CustomTextForm(
                       isPassword: true,
                       controller: _passwordController,
-                      text: "Password ***",
+                      text: "Password ",
                     ),
                     Gap(70),
-                    CustomSubmissionButton(onTap: _submitForm),
+                    CustomSubmissionButton(onTap: _submitForm, text: 'Login',),
                     Gap(30),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
