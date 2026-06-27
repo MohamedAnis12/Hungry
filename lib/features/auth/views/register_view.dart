@@ -1,6 +1,4 @@
 import 'dart:async';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
@@ -15,7 +13,6 @@ class RegisterView extends StatefulWidget {
   @override
   State<RegisterView> createState() => _RegisterViewState();
 }
-
 class _RegisterViewState extends State<RegisterView> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();

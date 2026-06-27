@@ -4,7 +4,6 @@ import 'package:hungry/core/constants/app_colors.dart';
 import 'package:hungry/features/auth/views/profile_view.dart';
 import 'package:hungry/features/cart/view/cart_view.dart';
 import 'package:hungry/features/home/view/home_view.dart';
-import 'package:hungry/features/product/view/product_view.dart';
 
 class Root extends StatefulWidget {
   const Root({super.key});
@@ -14,7 +13,7 @@ class Root extends StatefulWidget {
 }
 
 class _RootState extends State<Root> {
-  List<Widget> pages = [HomeView(), CartView(), ProductView(), ProfileView()];
+  List<Widget> pages = [HomeView(), CartView(), ProfileView()];
   PageController controller = PageController();
   int curentPage = 0;
 
@@ -68,10 +67,6 @@ class _RootState extends State<Root> {
               BottomNavigationBarItem(
                 icon: Icon(CupertinoIcons.cart),
                 label: "cart",
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.messenger_outline),
-                label: "products",
               ),
               BottomNavigationBarItem(
                 icon: Icon(CupertinoIcons.profile_circled),
