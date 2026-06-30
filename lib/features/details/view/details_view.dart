@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:hungry/core/constants/app_colors.dart';
 import 'package:hungry/core/constants/app_strings.dart';
+import 'package:hungry/features/details/widgets/custom_slider.dart';
 
 class DetailsView extends StatefulWidget {
   const DetailsView({super.key});
@@ -11,7 +13,6 @@ class DetailsView extends StatefulWidget {
 }
 
 class _DetailsViewState extends State<DetailsView> {
-  double _sliderValue = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,29 +37,8 @@ class _DetailsViewState extends State<DetailsView> {
                       Text(
                         "Customize Your Burger\n to Your Tastes.\n Ultimate Experience",
                       ),
-                      SizedBox(
-                        width: 200,
-                        child: SliderTheme(
-                          data: SliderTheme.of(context).copyWith(
-                            trackHeight:
-                                8.0, 
-                            
 
-                            overlayShape: const RoundSliderOverlayShape(
-                              overlayRadius:
-                                  28.0,
-                            ),
-                          ),
-                          child: Slider(
-                            value: _sliderValue,
-                            onChanged: (v) {
-                              setState(() {
-                                _sliderValue = v;
-                              });
-                            },
-                          ),
-                        ),
-                      ),
+                      CustomSlider(),
                       Row(children: [Text("🥶"), Gap(120), Text("🌶")]),
                     ],
                   ),
