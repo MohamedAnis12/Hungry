@@ -2,16 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:hungry/core/constants/app_colors.dart';
 import 'package:hungry/features/details/model/additions_model.dart';
 
-class CustomAddingItems extends StatefulWidget {
-  const CustomAddingItems({super.key, required this.additionsModel});
+class CustomAddingItems extends StatelessWidget {
+  const CustomAddingItems({
+    super.key,
+    required this.additionsModel,
+    required this.onAddTap,
+    required this.onRemoveTap,
+    required this.add,
+  });
   final AdditionsModel additionsModel;
-
-  @override
-  State<CustomAddingItems> createState() => _CustomAddingItemsState();
-}
-
-class _CustomAddingItemsState extends State<CustomAddingItems> {
-  bool add = false;
+  final void Function()? onAddTap;
+  final void Function()? onRemoveTap;
+  final bool add;
 
   @override
   Widget build(BuildContext context) {
@@ -37,10 +39,7 @@ class _CustomAddingItemsState extends State<CustomAddingItems> {
                 borderRadius: BorderRadius.circular(16),
               ),
               child: SizedBox(
-                child: Image.asset(
-                  "${widget.additionsModel.image}",
-                  width: 100,
-                ),
+                child: Image.asset("${additionsModel.image}", width: 100),
               ),
             ),
             Spacer(flex: 1),
@@ -49,11 +48,7 @@ class _CustomAddingItemsState extends State<CustomAddingItems> {
               children: [
                 add
                     ? GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            add = false;
-                          });
-                        },
+                        onTap: onRemoveTap,
                         child: Container(
                           decoration: BoxDecoration(
                             color: AppColors.appColor,
@@ -64,26 +59,24 @@ class _CustomAddingItemsState extends State<CustomAddingItems> {
                       )
                     : SizedBox.shrink(),
                 Text(
-                  "${widget.additionsModel.title}",
+                  "${additionsModel.title}",
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-             add?  SizedBox.shrink(): GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      add = true;
-                    });
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: AppColors.appColor,
-                      borderRadius: BorderRadius.circular(200),
-                    ),
-                    child: Icon(Icons.add, color: Colors.white),
-                  ),
-                ),
+                add
+                    ? SizedBox.shrink()
+                    : GestureDetector(
+                        onTap: onAddTap,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: AppColors.appColor,
+                            borderRadius: BorderRadius.circular(200),
+                          ),
+                          child: Icon(Icons.add, color: Colors.white),
+                        ),
+                      ),
               ],
             ),
             Spacer(flex: 1),

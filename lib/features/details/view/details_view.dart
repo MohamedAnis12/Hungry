@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hungry/core/constants/app_strings.dart';
 import 'package:hungry/features/details/model/additions_model.dart';
+import 'package:hungry/features/details/widgets/custom_add_to_cart_bottom.dart';
 import 'package:hungry/features/details/widgets/custom_adding_items.dart';
 import 'package:hungry/features/details/widgets/custom_slider.dart';
 
@@ -67,7 +68,8 @@ class _DetailsViewState extends State<DetailsView> {
   ];
   late List<AdditionsModel> toppingsList;
   late List<AdditionsModel> sideOptionsList;
-
+  bool addFlag = false;
+  double total = 0;
   @override
   void initState() {
     toppingsList = additionalList
@@ -83,68 +85,109 @@ class _DetailsViewState extends State<DetailsView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: EdgeInsetsGeometry.only(left: 16),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Gap(AppStrings.startGap),
-              GestureDetector(
-                onTap: () => Navigator.pop(context),
-                child: Icon(CupertinoIcons.chevron_left, size: 32),
-              ),
-              Gap(AppStrings.normalGap),
-              Row(
+      body: Stack(
+        children: [
+          SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Image.asset("assets/test/Customize_burger.png", height: 300),
-                  Column(
+                  Gap(AppStrings.startGap),
+                  GestureDetector(
+                    onTap: () => Navigator.pop(context),
+                    child: Icon(CupertinoIcons.chevron_left, size: 32),
+                  ),
+                  Gap(AppStrings.normalGap),
+                  Row(
                     children: [
-                      Text(
-                        "Customize Your Burger\n to Your Tastes.\n Ultimate Experience",
+                      Image.asset(
+                        "assets/test/Customize_burger.png",
+                        height: 300,
                       ),
+                      Column(
+                        children: [
+                          Text(
+                            "Customize Your Burger\n to Your Tastes.\n Ultimate Experience",
+                          ),
 
-                      CustomSlider(),
-                      Row(children: [Text("🥶"), Gap(120), Text("🌶")]),
+                          CustomSlider(),
+                          Row(children: [Text("🥶"), Gap(120), Text("🌶")]),
+                        ],
+                      ),
                     ],
                   ),
+                  Gap(AppStrings.normalGap),
+                  Text(
+                    "Toppings",
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  ),
+                  Gap(10),
+                  SizedBox(
+                    height: 170,
+                    child: ListView.builder(
+                      itemCount: toppingsList.length,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) => CustomAddingItems(
+                        add: addFlag,
+                        additionsModel: toppingsList[index],
+                        onAddTap: () {
+                          setState(() {
+                            total += toppingsList[index].price!.toDouble();
+                            addFlag = true;
+                          });
+                        },
+                        onRemoveTap: () {
+                          setState(() {
+                            total -= toppingsList[index].price!.toDouble();
+                            addFlag = false;
+                          });
+                        },
+                      ),
+                    ),
+                  ),
+                  Gap(AppStrings.normalGap),
+                  Text(
+                    "Side Options",
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  ),
+                  Gap(10),
+                  SizedBox(
+                    height: 170,
+                    child: ListView.builder(
+                      itemCount: sideOptionsList.length,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) => CustomAddingItems(
+                        additionsModel: sideOptionsList[index],
+                        onAddTap: () {
+                          setState(() {
+                            total += sideOptionsList[index].price!.toDouble();
+                            addFlag = true;
+                          });
+                        },
+                        onRemoveTap: () {
+                          setState(() {
+                            total -= sideOptionsList[index].price!.toDouble();
+                            addFlag = false;
+                          });
+                        },
+                        add: addFlag,
+                      ),
+                    ),
+                  ),
+                  Gap(150),
                 ],
               ),
-              Gap(AppStrings.normalGap),
-              Text(
-                "Toppings",
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              ),
-              Gap(10),
-              SizedBox(
-                height: 170,
-                child: ListView.builder(
-                  itemCount: toppingsList.length,
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) =>
-                      CustomAddingItems(additionsModel: toppingsList[index]),
-                ),
-              ),
-              Gap(AppStrings.normalGap),
-              Text(
-                "sideOptions",
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              ),
-              Gap(10),
-              SizedBox(
-                height: 170,
-                child: ListView.builder(
-                  itemCount: sideOptionsList.length,
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) =>
-                      CustomAddingItems(additionsModel: sideOptionsList[index]),
-                ),
-              ),
-            ],
+            ),
           ),
-        ),
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: CustomAddToCartBottom(total: total),
+          ),
+        ],
       ),
     );
   }
 }
-
