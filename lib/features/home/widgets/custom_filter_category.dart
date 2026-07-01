@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hungry/core/constants/app_colors.dart';
 
-class CustomFilterItem extends StatelessWidget {
-  const CustomFilterItem({
+class CustomFilterCategory extends StatelessWidget {
+  const CustomFilterCategory({
     super.key,
     required this.text,
     required this.isSelected,

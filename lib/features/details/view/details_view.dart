@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:hungry/core/constants/app_colors.dart';
 import 'package:hungry/core/constants/app_strings.dart';
+import 'package:hungry/features/details/model/additions_model.dart';
+import 'package:hungry/features/details/widgets/custom_adding_items.dart';
 import 'package:hungry/features/details/widgets/custom_slider.dart';
 
 class DetailsView extends StatefulWidget {
@@ -13,22 +14,87 @@ class DetailsView extends StatefulWidget {
 }
 
 class _DetailsViewState extends State<DetailsView> {
+  final List<AdditionsModel> additionalList = [
+    AdditionsModel(
+      title: "Bacons",
+      image: "assets/custom additions/bacons.png",
+      category: "toppings",
+      price: 5.0,
+    ),
+    AdditionsModel(
+      title: "Pickles",
+      image: "assets/custom additions/pickles.png",
+      category: "toppings",
+      price: 5.0,
+    ),
+    AdditionsModel(
+      title: "Onions",
+      image: "assets/custom additions/onions.png",
+      category: "toppings",
+      price: 5.0,
+    ),
+    AdditionsModel(
+      title: "Tomato",
+      image: "assets/custom additions/tomato.png",
+      category: "toppings",
+      price: 5.0,
+    ),
+    //sideOptions
+    AdditionsModel(
+      title: "coleslaw",
+      image: "assets/custom additions/coleslaw.png",
+      category: "sideOptions",
+      price: 5.0,
+    ),
+    AdditionsModel(
+      title: "fries",
+      image: "assets/custom additions/fries.png",
+      category: "sideOptions",
+      price: 5.0,
+    ),
+    AdditionsModel(
+      title: "friedonion",
+      image: "assets/custom additions/friedonion.png",
+      category: "sideOptions",
+      price: 5.0,
+    ),
+    AdditionsModel(
+      title: "salad",
+      image: "assets/custom additions/salad.png",
+      category: "sideOptions",
+      price: 5.0,
+    ),
+  ];
+  late List<AdditionsModel> toppingsList;
+  late List<AdditionsModel> sideOptionsList;
+
+  @override
+  void initState() {
+    toppingsList = additionalList
+        .where((item) => item.category == "toppings")
+        .toList();
+    sideOptionsList = additionalList
+        .where((item) => item.category == "sideOptions")
+        .toList();
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: GestureDetector(
-          onTap: () => Navigator.pop(context),
-          child: Icon(CupertinoIcons.chevron_left, size: 32),
-        ),
-        backgroundColor: Colors.white,
-      ),
       body: Padding(
-        padding: EdgeInsetsGeometry.symmetric(horizontal: 8),
+        padding: EdgeInsetsGeometry.only(left: 16),
         child: SingleChildScrollView(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Gap(AppStrings.startGap),
+              GestureDetector(
+                onTap: () => Navigator.pop(context),
+                child: Icon(CupertinoIcons.chevron_left, size: 32),
+              ),
+              Gap(AppStrings.normalGap),
               Row(
                 children: [
                   Image.asset("assets/test/Customize_burger.png", height: 300),
@@ -44,6 +110,36 @@ class _DetailsViewState extends State<DetailsView> {
                   ),
                 ],
               ),
+              Gap(AppStrings.normalGap),
+              Text(
+                "Toppings",
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              ),
+              Gap(10),
+              SizedBox(
+                height: 170,
+                child: ListView.builder(
+                  itemCount: toppingsList.length,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) =>
+                      CustomAddingItems(additionsModel: toppingsList[index]),
+                ),
+              ),
+              Gap(AppStrings.normalGap),
+              Text(
+                "sideOptions",
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              ),
+              Gap(10),
+              SizedBox(
+                height: 170,
+                child: ListView.builder(
+                  itemCount: sideOptionsList.length,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) =>
+                      CustomAddingItems(additionsModel: sideOptionsList[index]),
+                ),
+              ),
             ],
           ),
         ),
@@ -51,3 +147,4 @@ class _DetailsViewState extends State<DetailsView> {
     );
   }
 }
+
