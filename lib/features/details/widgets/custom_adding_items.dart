@@ -13,7 +13,7 @@ class CustomAddingItems extends StatelessWidget {
   final AdditionsModel additionsModel;
   final void Function()? onAddTap;
   final void Function()? onRemoveTap;
-  final bool add;
+  final bool? add;
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +46,7 @@ class CustomAddingItems extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                add
+                add!
                     ? GestureDetector(
                         onTap: onRemoveTap,
                         child: Container(
@@ -65,7 +65,7 @@ class CustomAddingItems extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                add
+                add!
                     ? SizedBox.shrink()
                     : GestureDetector(
                         onTap: onAddTap,

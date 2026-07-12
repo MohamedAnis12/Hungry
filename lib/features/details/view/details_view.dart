@@ -68,7 +68,7 @@ class _DetailsViewState extends State<DetailsView> {
   ];
   late List<AdditionsModel> toppingsList;
   late List<AdditionsModel> sideOptionsList;
-  bool addFlag = false;
+  //bool addFlag = false;
   double total = 0;
   @override
   void initState() {
@@ -129,18 +129,18 @@ class _DetailsViewState extends State<DetailsView> {
                       itemCount: toppingsList.length,
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) => CustomAddingItems(
-                        add: addFlag,
+                        add: toppingsList[index].isAdd,
                         additionsModel: toppingsList[index],
                         onAddTap: () {
                           setState(() {
                             total += toppingsList[index].price!.toDouble();
-                            addFlag = true;
+                            toppingsList[index].isAdd = true;
                           });
                         },
                         onRemoveTap: () {
                           setState(() {
                             total -= toppingsList[index].price!.toDouble();
-                            addFlag = false;
+                            toppingsList[index].isAdd = false;
                           });
                         },
                       ),
@@ -159,19 +159,19 @@ class _DetailsViewState extends State<DetailsView> {
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) => CustomAddingItems(
                         additionsModel: sideOptionsList[index],
+                        add: sideOptionsList[index].isAdd,
                         onAddTap: () {
                           setState(() {
                             total += sideOptionsList[index].price!.toDouble();
-                            addFlag = true;
+                            sideOptionsList[index].isAdd = true;
                           });
                         },
                         onRemoveTap: () {
                           setState(() {
                             total -= sideOptionsList[index].price!.toDouble();
-                            addFlag = false;
+                            sideOptionsList[index].isAdd = false;
                           });
                         },
-                        add: addFlag,
                       ),
                     ),
                   ),
