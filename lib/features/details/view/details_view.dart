@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hungry/core/constants/app_strings.dart';
 import 'package:hungry/features/details/model/additions_model.dart';
-import 'package:hungry/features/details/widgets/custom_add_to_cart_bottom.dart';
+import 'package:hungry/shared/custom_total_price_bottom.dart';
 import 'package:hungry/features/details/widgets/custom_adding_items.dart';
 import 'package:hungry/features/details/widgets/custom_slider.dart';
 
@@ -184,7 +184,10 @@ class _DetailsViewState extends State<DetailsView> {
             bottom: 0,
             left: 0,
             right: 0,
-            child: CustomAddToCartBottom(total: total),
+            child: CustomTotalPriceBottom(
+              total: total,
+              buttonTitle: "Add To Cart",
+            ),
           ),
         ],
       ),

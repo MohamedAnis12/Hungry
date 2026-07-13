@@ -9,7 +9,7 @@ class CustomAddingCount extends StatefulWidget {
 }
 
 class _CustomAddingCountState extends State<CustomAddingCount> {
-  int count = 90;
+  int count = 1;
 
   @override
   Widget build(BuildContext context) {
