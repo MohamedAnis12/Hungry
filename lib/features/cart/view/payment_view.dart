@@ -3,8 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hungry/core/constants/app_colors.dart';
 import 'package:hungry/core/constants/app_strings.dart';
+import 'package:hungry/features/cart/widgets/custom_cash_payment.dart';
+import 'package:hungry/features/cart/widgets/custom_dialog.dart';
 import 'package:hungry/features/cart/widgets/custom_divider.dart';
 import 'package:hungry/features/cart/widgets/custom_order_text.dart';
+import 'package:hungry/shared/custom_total_price_bottom.dart';
 
 class PaymentView extends StatelessWidget {
   const PaymentView({super.key});
@@ -57,6 +60,15 @@ class PaymentView extends StatelessWidget {
             ),
             Gap(10),
             CustomCashPayment(),
+            Spacer(),
+            CustomTotalPriceBottom(
+              total: 15,
+              buttonTitle: 'pay now',
+              onTap: () {
+                showSuccessDialog(context);
+              },
+            ),
+            Gap(10),
           ],
         ),
       ),
@@ -64,33 +76,5 @@ class PaymentView extends StatelessWidget {
   }
 }
 
-class CustomCashPayment extends StatelessWidget {
-  const CustomCashPayment({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 75,
-      decoration: BoxDecoration(
-        color: AppColors.dark,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(spreadRadius: 2, blurRadius: 5, color: Colors.grey),
-        ],
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Image.asset("assets/dollar Background Removed 1.png"),
-          Text(
-            "cash on delivery",
-            style: TextStyle(color: Colors.white, fontSize: 18),
-          ),
-          Gap(125),
-          Padding(padding: EdgeInsetsGeometry.only(right: 10),
-          child: Icon(Icons.circle,color: Colors.white,),)
-        ],
-      ),
-    );
-  }
-}
+
