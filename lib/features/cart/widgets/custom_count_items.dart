@@ -11,7 +11,7 @@ class CustomCountItems extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Container(
         padding: EdgeInsets.all(8),
-        height: 185,
+        height: 200,
         width: double.infinity,
         decoration: BoxDecoration(
           color: Colors.white,

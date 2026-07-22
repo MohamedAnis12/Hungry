@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:hungry/shared/custom_button.dart';
 
 class CustomTotalPriceBottom extends StatelessWidget {
-  const CustomTotalPriceBottom({super.key, required this.total, required this.buttonTitle});
+  const CustomTotalPriceBottom({super.key, required this.total, required this.buttonTitle, this.onTap});
   final double total;
   final String buttonTitle;
+  final void Function()? onTap;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -30,7 +31,7 @@ class CustomTotalPriceBottom extends StatelessWidget {
               Spacer(flex: 1),
             ],
           ),
-          CustomButton(onTap: () {}, text: buttonTitle),
+          CustomButton(onTap: onTap, text: buttonTitle),
         ],
       ),
     );

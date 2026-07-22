@@ -39,7 +39,7 @@ class _CustomAddingCountState extends State<CustomAddingCount> {
           ),
           GestureDetector(
             onTap: () => setState(() {
-              count != 0 ? count-- : null;
+              count != 1 ? count-- : null;
             }),
             child: Container(
               height: 50,

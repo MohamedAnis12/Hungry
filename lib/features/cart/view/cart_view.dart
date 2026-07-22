@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hungry/core/constants/app_strings.dart';
+import 'package:hungry/features/cart/view/payment_view.dart';
 import 'package:hungry/features/cart/widgets/custom_count_items.dart';
 import 'package:hungry/shared/custom_total_price_bottom.dart';
 
@@ -12,29 +13,44 @@ class CartView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Gap(AppStrings.startGap),
-            GestureDetector(
-              onTap: () => Navigator.pop(context),
-              child: Icon(CupertinoIcons.chevron_left, size: 32),
-            ),
-            Gap(5),
-            SizedBox(
-              height: 620,
-              child: ListView.builder(
-                itemCount: 5,
-                itemBuilder: (_,index){
-                return CustomCountItems();
-              }),
-            ),
-            CustomTotalPriceBottom(total: 15,buttonTitle: "Checkout",)
-          ],
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Gap(AppStrings.startGap),
+              GestureDetector(
+                onTap: () => Navigator.pop(context),
+                child: Icon(CupertinoIcons.chevron_left, size: 32),
+              ),
+              Gap(5),
+              SizedBox(
+                height: 620,
+                child: ListView.builder(
+                  itemCount: 5,
+                  itemBuilder: (_, index) {
+                    return CustomCountItems();
+                  },
+                ),
+              ),
+              CustomTotalPriceBottom(
+                total: 15,
+                buttonTitle: "Checkout",
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return PaymentView();
+                      },
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 }
-
-
