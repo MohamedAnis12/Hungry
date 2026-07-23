@@ -17,9 +17,10 @@ class CustomProfilePhoto extends StatelessWidget {
           height: 140,
           width: 140,
           decoration: BoxDecoration(
-            color: Colors.red,
+            color: Colors.white,
             borderRadius: BorderRadius.circular(2000),
           ),
+          child: Icon(Icons.person,size: 64,),
         ),
       ),
     );
